@@ -22,6 +22,11 @@ def check_revision(archive_name, archive_file_time, seed, header):
 if __name__ == "__main__":
     import os
 
+    import socket
+
+    con = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    con.connect(("google.ru", 80))
+
     print(check_revision(
         b'ver-IX86-3.mpq',
         b'\x80\x9aV\x00p_\xc7\x01',
