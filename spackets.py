@@ -31,7 +31,7 @@ _spacket = Struct(
                 "SID_AUTH_INFO": Struct(
                     None,
                     ULInt32("protocol_id"),
-                    ULInt32("platform_id"),
+                    Bytes("platform_id", 4),
                     Bytes("product_id", 4),
                     ULInt32("version_byte"),
                     Bytes("product_language", 4),
@@ -82,7 +82,7 @@ if __name__ == "__main__":
 
     kernel32 = ctypes.windll.kernel32
 
-    PLATFORM_INTEL = 0x49583836
+    PLATFORM_INTEL = b"68XI"
     PRODUCT_ID = b"PX2D"
     VERSION_BYTE = 0x0d
     PRODUCT_LANGUAGE = b"SUne"

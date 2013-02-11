@@ -3,7 +3,7 @@ from connection import Connection
 
 
 class Bnet():
-    PLATFORM_INTEL = 0x49583836
+    PLATFORM_INTEL = b"68XI"
     PRODUCT_ID = b"PX2D"
     VERSION_BYTE = 0x0d
     PRODUCT_LANGUAGE = b"SUne"
