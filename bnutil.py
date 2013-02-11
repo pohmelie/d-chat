@@ -1,5 +1,6 @@
 import struct
 from functools import reduce
+from xsha1 import calc_hash_buffer as xsha1
 
 
 mpq_hash_codes = (
@@ -31,7 +32,7 @@ def check_revision(formula, mpq, path="d2xp\\"):
     actions = compile("\n".join(actions), "<string>", mode="exec")
 
     get_raw = lambda fname: open(path + fname, mode="rb", buffering=0).readall()
-    data = sum(map(get_raw, ("Game.exe", "Bnclient.dll", "D2Client.dll")), b"")
+    data = b"".join(map(get_raw, ("Game.exe", "Bnclient.dll", "D2Client.dll")))
     nums = struct.unpack("{}I".format(len(data) // 4), data)
 
     env = {}
@@ -77,7 +78,9 @@ alpha_map = (
     0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF
 )
 
+
 def hash_d2key(cdkey, client_token, server_token):
+
     checksum = 0
     m_key = [None] * len(cdkey)
 
@@ -92,29 +95,53 @@ def hash_d2key(cdkey, client_token, server_token):
     if reduce(lambda v, ch: v + (int(ch, 16) ^ (v * 2)), m_key, 3) & 0xff != checksum:
         return False, None, None  # invalid CD-key
 
-    for i in range(len(cdkey), -1, -1):
+    for i in range(len(cdkey) - 1, -1, -1):
         n = (i - 9) % 0x10
         m_key[i], m_key[n] = m_key[n], m_key[i]
 
     v2 = 0x13AC9741
-    for i in range(len(cdkey), -1, -1):
+    for i in range(len(cdkey) - 1, -1, -1):
         if ord(m_key[i]) <= ord("7"):
             m_key[i] = chr((v2 & 7) ^ ord(m_key[i]))
             v2 >>= 3
         elif ord(m_key[i]) < ord("A"):
             m_key[i] = chr((i & 1) ^ ord(m_key[i]))
 
-    public_value =
+    m_key = "".join(map(str, m_key))
+
+    public_value = int(m_key[2:8], 16)
+    hash_data = struct.pack(
+        "6I",
+        client_token,
+        server_token,
+        int(m_key[:2], 16),
+        int(m_key[2:8], 16),
+        0,
+        int(m_key[8:16], 16)
+    )
+
+    return True, public_value, struct.pack("5i", *xsha1(hash_data))
 
 
 if __name__ == "__main__":
+
+    from recipe import *
+
     formula = b'A=803935755 B=3407199954 C=3485268447 4 A=A^S B=B+C C=C^A A=A-B'
     mpq = b'ver-IX86-3.mpq'
 
-    from time import time
-    start = time()
     print(check_revision(formula, mpq))
-    print("{:.2f}s".format(time() - start))
 
-    cdkey = "MKK46R7NC48M6PTV"
-    hash_d2key(cdkey, 0, 0)
+    '''
+    server_token = 1180278819
+    cdkey = b"VK2ZRT8HCWJXB6RX"
+    #cdkey = b"TJ8ZBNRR6GNT6T2X"
+    client_token = 1372890262
+    _, pub, hashed = hash_d2key(cdkey, client_token, server_token)
+    print(pub, hashed) '''
+
+    cdkey = b"MKK46R7NC48M6PTV"
+    server_token = 0xb8997ed1
+    client_token = 0x00491244
+    _, pub, hashed = hash_d2key(cdkey, client_token, server_token)
+    print(pub, rev(hashed))
