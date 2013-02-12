@@ -10,8 +10,9 @@ class Connection(asyncore.dispatcher):
         self.callback = callback
         self.qsend = collections.deque()
 
-    def push(self, x):
-        self.qsend.appendleft(x)
+    def push(self, *args):
+        for x in args:
+            self.qsend.appendleft(x)
 
     def writable(self):
         return len(self.qsend) != 0

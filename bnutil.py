@@ -1,7 +1,10 @@
 import struct
 from functools import reduce
-from xsha1 import calc_hash_buffer as xsha1
+from xsha1 import calc_hash_buffer
 
+
+def bsha1(data):
+    return struct.pack("5i", *calc_hash_buffer(data))
 
 mpq_hash_codes = (
     0xE7F4CB62,
@@ -93,7 +96,7 @@ def hash_d2key(cdkey, client_token, server_token):
         m_key[i + 1] = "{:X}".format(n & 0xf)
 
     if reduce(lambda v, ch: v + (int(ch, 16) ^ (v * 2)), m_key, 3) & 0xff != checksum:
-        return False, None, None  # invalid CD-key
+        return None, None  # invalid CD-key
 
     for i in range(len(cdkey) - 1, -1, -1):
         n = (i - 9) % 0x10
@@ -120,8 +123,10 @@ def hash_d2key(cdkey, client_token, server_token):
         int(m_key[8:16], 16)
     )
 
-    return True, public_value, struct.pack("5i", *xsha1(hash_data))
+    return public_value, bsha1(hash_data)
 
+def sub_double_hash(client_token, server_token, hashpass):
+    return bsha1(struct.pack("2I20s", client_token, server_token, hashpass))
 
 if __name__ == "__main__":
 
@@ -143,5 +148,5 @@ if __name__ == "__main__":
     cdkey = b"MKK46R7NC48M6PTV"
     server_token = 0xb8997ed1
     client_token = 0x00491244
-    _, pub, hashed = hash_d2key(cdkey, client_token, server_token)
+    pub, hashed = hash_d2key(cdkey, client_token, server_token)
     print(pub, rev(hashed))

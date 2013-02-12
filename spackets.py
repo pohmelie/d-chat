@@ -21,6 +21,10 @@ _spacket = Struct(
         SID_AUTH_INFO=0x50,
         SID_PING=0x25,
         SID_AUTH_CHECK=0x51,
+        SID_LOGONRESPONSE2=0x3a,
+        SID_ENTERCHAT=0x0a,
+        SID_GETCHANNELLIST=0x0b,
+        SID_JOINCHANNEL=0x0c,
     ),
     ULInt16("length"),
     Embed(
@@ -66,6 +70,27 @@ _spacket = Struct(
                     ),
                     CString("exe_info"),
                     CString("cd_key_owner")
+                ),
+                "SID_LOGONRESPONSE2": Struct(
+                    None,
+                    ULInt32("client_token"),
+                    ULInt32("server_token"),
+                    Bytes("hash", 5 * 4),
+                    CString("username"),
+                ),
+                "SID_ENTERCHAT": Struct(
+                    None,
+                    CString("username"),
+                    CString("statstring"),
+                ),
+                "SID_GETCHANNELLIST": Struct(
+                    None,
+                    Bytes("product_id", 4),
+                ),
+                "SID_JOINCHANNEL": Struct(
+                    None,
+                    ULInt32("unknown"),
+                    CString("channel_name"),
                 ),
             }
         )
