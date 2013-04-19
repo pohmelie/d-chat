@@ -1,10 +1,9 @@
 import time
-import socket
 
 from construct import Container
 from random import randint
+from socket import socket
 
-from connection import Connection
 from spackets import spacket
 from rpackets import rpackets
 from bnutil import check_revision, hash_d2key, sub_double_hash, bsha1
@@ -15,20 +14,17 @@ class Bnet():
         self.host = host
         self.port = port
 
-        self.onlogin = kwargs.get("onlogin", lambda x: x)  # onlogin -> result
-
     def login(self, username, password):
         self.username = bytes(username, "ascii")
         self.hashpass = bsha1(bytes(password, "ascii"))
 
         self.head = b""
 
-        self.con = Connection(self.onpacket)
-        self.con.create_socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.con.connect((self.host, self.port))
+        self.sock = socket()
+        self.sock.connect((self.host, self.port))
 
-        self.con.push(b"\x01")
-        self.con.push(
+        self.sock.send(b"\x01")
+        self.sock.send(
             spacket.build(
                 Container(
                     packet_id="SID_AUTH_INFO",
@@ -47,18 +43,14 @@ class Bnet():
             )
         )
 
-    def onpacket(self, data):
-        unparsed = rpackets.parse(self.head + data)
+    def onpacket(self):
+        unparsed = rpackets.parse(self.head + self.sock.recv(2 ** 16))
         self.head = unparsed.tail
-
-        #debug
-        if len(unparsed.rpackets) == 0:
-            print(len(self.head), self.head)
 
         for pack in unparsed.rpackets:
 
             if pack.packet_id == "SID_PING":
-                self.con.push(spacket.build(pack))
+                self.sock.send(spacket.build(pack))
 
             elif pack.packet_id == "SID_AUTH_INFO":
                 self.client_token = randint(10 * 60 * 1000, 2 ** 32 - 1)
@@ -67,7 +59,7 @@ class Bnet():
                 clpub, clhash = hash_d2key(b"DPTGEGHRPH4EB7EV", self.client_token, self.server_token)
                 lodpub, lodhash = hash_d2key(b"KFE6H7RPTRTHDEJE", self.client_token, self.server_token)
 
-                self.con.push(
+                self.sock.send(
                     spacket.build(
                         Container(
                             packet_id="SID_AUTH_CHECK",
@@ -100,10 +92,8 @@ class Bnet():
                 )
 
             elif pack.packet_id == "SID_AUTH_CHECK":
-                if pack.result != 0:
-                    self.onlogin(pack)
-                else:
-                    self.con.push(
+                if pack.result == 0:
+                    self.sock.send(
                         spacket.build(
                             Container(
                                 packet_id="SID_LOGONRESPONSE2",
@@ -120,17 +110,17 @@ class Bnet():
                     )
 
             elif pack.packet_id == "SID_LOGONRESPONSE2":
-                if pack.result != 0:
-                    self.onlogin(pack)
-                else:
-                    self.con.push(
+                if pack.result == 0:
+                    self.sock.send(
                         spacket.build(
                             Container(
                                 packet_id="SID_ENTERCHAT",
                                 username=self.username,
                                 statstring=b"",
                             )
-                        ),
+                        )
+                    )
+                    self.sock.send(
                         spacket.build(
                             Container(
                                 packet_id="SID_GETCHANNELLIST",
@@ -140,7 +130,7 @@ class Bnet():
                     )
 
             elif pack.packet_id == "SID_ENTERCHAT":
-                self.con.push(
+                self.sock.send(
                     spacket.build(
                         Container(
                             packet_id="SID_JOINCHANNEL",
@@ -152,9 +142,17 @@ class Bnet():
 
 
 if __name__ == "__main__":
-    import asyncore
-
     bnet = Bnet()
     bnet.login("pohmelie9", "chat")
 
-    asyncore.loop(0.01)
+    import urwid
+
+    def show_or_exit(key):
+        if key in ('q', 'Q'):
+            raise urwid.ExitMainLoop()
+
+    txt = urwid.Text("YOBA!")
+    fill = urwid.Filler(txt, 'top')
+    loop = urwid.MainLoop(fill, unhandled_input=show_or_exit)
+    loop.watch_file(bnet.sock, bnet.onpacket)
+    loop.run()
