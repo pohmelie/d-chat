@@ -1,4 +1,5 @@
 import struct
+import os.path
 from functools import reduce
 from xsha1 import calc_hash_buffer
 
@@ -18,7 +19,7 @@ mpq_hash_codes = (
 )
 
 
-def check_revision(formula, mpq, path="d2xp\\"):
+def check_revision(formula, mpq, path="d2xp"):
 
     mpq_hash = mpq_hash_codes[mpq[9] - ord("0")]
     formula = str(formula, "ascii").split()
@@ -34,7 +35,7 @@ def check_revision(formula, mpq, path="d2xp\\"):
 
     actions = compile("\n".join(actions), "<string>", mode="exec")
 
-    get_raw = lambda fname: open(path + fname, mode="rb", buffering=0).readall()
+    get_raw = lambda fname: open(os.path.join(path, fname), mode="rb", buffering=0).readall()
     data = b"".join(map(get_raw, ("Game.exe", "Bnclient.dll", "D2Client.dll")))
     nums = struct.unpack("{}I".format(len(data) // 4), data)
 
