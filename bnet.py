@@ -10,9 +10,12 @@ from bnutil import check_revision, hash_d2key, sub_double_hash, bsha1
 
 
 class Bnet():
-    def __init__(self, host="rubattle.net", port=6112, **kwargs):
+    def __init__(self, host="rubattle.net", port=6112, login_error=None, chat_event=None):
         self.host = host
         self.port = port
+
+        self.login_error = login_error  # login_error(packet_id, retcode)
+        self.chat_event = chat_event  # chat_event(packet)
 
     def login(self, username, password):
         self.username = bytes(username, "ascii")
@@ -23,8 +26,8 @@ class Bnet():
         self.sock = socket()
         self.sock.connect((self.host, self.port))
 
-        self.sock.send(b"\x01")
-        self.sock.send(
+        self.sock.sendall(b"\x01")
+        self.sock.sendall(
             spacket.build(
                 Container(
                     packet_id="SID_AUTH_INFO",
@@ -50,7 +53,7 @@ class Bnet():
         for pack in unparsed.rpackets:
 
             if pack.packet_id == "SID_PING":
-                self.sock.send(spacket.build(pack))
+                self.sock.sendall(spacket.build(pack))
 
             elif pack.packet_id == "SID_AUTH_INFO":
                 self.client_token = randint(10 * 60 * 1000, 2 ** 32 - 1)
@@ -59,7 +62,7 @@ class Bnet():
                 clpub, clhash = hash_d2key(b"DPTGEGHRPH4EB7EV", self.client_token, self.server_token)
                 lodpub, lodhash = hash_d2key(b"KFE6H7RPTRTHDEJE", self.client_token, self.server_token)
 
-                self.sock.send(
+                self.sock.sendall(
                     spacket.build(
                         Container(
                             packet_id="SID_AUTH_CHECK",
@@ -92,8 +95,11 @@ class Bnet():
                 )
 
             elif pack.packet_id == "SID_AUTH_CHECK":
-                if pack.result == 0:
-                    self.sock.send(
+                if pack.result != 0:
+                    if self.login_error:
+                        self.login_error(pack.packet_id, pack.result)
+                else:
+                    self.sock.sendall(
                         spacket.build(
                             Container(
                                 packet_id="SID_LOGONRESPONSE2",
@@ -110,8 +116,11 @@ class Bnet():
                     )
 
             elif pack.packet_id == "SID_LOGONRESPONSE2":
-                if pack.result == 0:
-                    self.sock.send(
+                if pack.result != 0:
+                    if self.login_error:
+                        self.login_error(pack.packet_id, pack.result)
+                else:
+                    self.sock.sendall(
                         spacket.build(
                             Container(
                                 packet_id="SID_ENTERCHAT",
@@ -120,7 +129,7 @@ class Bnet():
                             )
                         )
                     )
-                    self.sock.send(
+                    self.sock.sendall(
                         spacket.build(
                             Container(
                                 packet_id="SID_GETCHANNELLIST",
@@ -130,7 +139,7 @@ class Bnet():
                     )
 
             elif pack.packet_id == "SID_ENTERCHAT":
-                self.sock.send(
+                self.sock.sendall(
                     spacket.build(
                         Container(
                             packet_id="SID_JOINCHANNEL",
@@ -139,6 +148,10 @@ class Bnet():
                         )
                     )
                 )
+
+            elif pack.packet_id == "SID_CHATEVENT":
+                if self.chat_event:
+                    self.chat_event(pack)
 
 
 if __name__ == "__main__":

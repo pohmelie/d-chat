@@ -91,7 +91,7 @@ rpacket = Struct(
     )
 )
 
-rpackets = Struct(  # server -> client (multiply packets)
+rpackets = Struct(
     None,
     OptionalGreedyRange(rpacket),
     ExprAdapter(
