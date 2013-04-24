@@ -10,7 +10,7 @@ from bnutil import check_revision, hash_d2key, sub_double_hash, bsha1
 
 
 class Bnet():
-    def __init__(self, host="rubattle.net", port=6112, login_error=None, chat_event=None):
+    def __init__(self, login_error=None, chat_event=None, host="rubattle.net", port=6112):
         self.host = host
         self.port = port
 
