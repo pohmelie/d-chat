@@ -1,4 +1,5 @@
 import time
+import logging
 
 from construct import Container
 from random import randint
@@ -10,12 +11,15 @@ from bnutil import check_revision, hash_d2key, sub_double_hash, bsha1
 
 
 class Bnet():
-    def __init__(self, login_error=None, chat_event=None, host="rubattle.net", port=6112):
+    def __init__(self, host, port):
         self.host = host
         self.port = port
 
-        self.login_error = login_error  # login_error(packet_id, retcode)
-        self.chat_event = chat_event  # chat_event(packet)
+    def login_error(self, packet_id, retcode):
+        pass
+
+    def chat_event(self, packet):
+        pass
 
     def login(self, username, password):
         self.username = bytes(username, "ascii")
@@ -46,9 +50,12 @@ class Bnet():
             )
         )
 
-    def onpacket(self):
+    def on_packet(self):
         unparsed = rpackets.parse(self.head + self.sock.recv(2 ** 16))
         self.head = unparsed.tail
+
+        if len(unparsed.rpackets) == 0:
+            logging.info("[bnet.py] Nothing to proceed, but data there")
 
         for pack in unparsed.rpackets:
 
@@ -96,8 +103,8 @@ class Bnet():
 
             elif pack.packet_id == "SID_AUTH_CHECK":
                 if pack.result != 0:
-                    if self.login_error:
-                        self.login_error(pack.packet_id, pack.result)
+                    logging.info("[bnet.py] Not zero result on \n{}".format(pack))
+                    self.login_error(pack.packet_id, pack.result)
                 else:
                     self.sock.sendall(
                         spacket.build(
@@ -117,8 +124,8 @@ class Bnet():
 
             elif pack.packet_id == "SID_LOGONRESPONSE2":
                 if pack.result != 0:
-                    if self.login_error:
-                        self.login_error(pack.packet_id, pack.result)
+                    logging.info("[bnet.py] Not zero result on \n{}".format(pack))
+                    self.login_error(pack.packet_id, pack.result)
                 else:
                     self.sock.sendall(
                         spacket.build(
@@ -150,22 +157,7 @@ class Bnet():
                 )
 
             elif pack.packet_id == "SID_CHATEVENT":
-                if self.chat_event:
-                    self.chat_event(pack)
+                self.chat_event(pack)
 
-
-if __name__ == "__main__":
-    bnet = Bnet()
-    bnet.login("pohmelie9", "chat")
-
-    import urwid
-
-    def show_or_exit(key):
-        if key in ('q', 'Q'):
-            raise urwid.ExitMainLoop()
-
-    txt = urwid.Text("YOBA!")
-    fill = urwid.Filler(txt, 'top')
-    loop = urwid.MainLoop(fill, unhandled_input=show_or_exit)
-    loop.watch_file(bnet.sock, bnet.onpacket)
-    loop.run()
+            else:
+                logging.info("[bnet.py] Unused packet \n{}".format(pack))

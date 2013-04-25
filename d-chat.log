@@ -1,0 +1,876 @@
+[17:44:10] [bnet.py] Unused packet 
+Container:
+    channels = [
+        b'Diablo II'
+        b'Diablo II Softcore'
+        b'Diablo II Hardcore'
+        b'Diablo II Trade'
+        b'Chat'
+        b''
+    ]
+    packet_id = 'SID_GETCHANNELLIST'
+    length = 74
+[17:44:10] [d-chat.py] Chat event 
+Container:
+    username = b'pohmelie9'
+    registration_authority = 3131961357
+    event_id = 'ID_CHANNEL'
+    text = b'Diablo II'
+    ping = 564
+    length = 48
+    account_number = 233876922
+    user_flags = 1
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:10] [d-chat.py] Chat event 
+Container:
+    username = b'pohmelie9'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2D'
+    ping = 564
+    length = 43
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:10] [d-chat.py] Chat event 
+Container:
+    username = b'bl.rs.devil'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,shon_pari,\x8b\x80>\x02\x02\x03\x01\x19\xffR\x03\x03\xff\x02B\xe7\xe7\xe7\xe7&\xff\x01\xe7\xe7\xffO\xc0\x98\x80\x80\x01\xff\xff'
+    ping = 165
+    length = 101
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:10] [d-chat.py] Chat event 
+Container:
+    username = b'egor1126'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,Chychymbra,\x8b\x80<\x02\x03\x03\x035\xffQ\x03\x03\xff\x02\xff\x13\x13\x13\x13\xff\xff\xff\x13\x13\xffW\xe0\x9e\x80\x80\x01\xff\xff'
+    ping = 3
+    length = 99
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:10] [d-chat.py] Chat event 
+Container:
+    username = b'metamorphoze'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,BigUns,\x8b\x80;\x03\x03\x02\x02\r\xffQ\x03\x03\xff\x04\xff\x05\x05\x05\x05L\xff\x06\x05\x05\xff"\xe4\x86\x80\x80\x01\xff\xff'
+    ping = 186
+    length = 99
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'ergo_proxy'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,OnlyMid,\x8b\x809\x02\x02\x03\x01\x04\xff]\x03\x03\xff\x04M\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff^\xe0\x9e\x80\x80\x01\xff\xff'
+    ping = 478
+    length = 98
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'ghost41'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,HataBaleru,\x8b\x80;\x02\x02\x01\x01\x14\xffT\x02\x02\xff\x02\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\x14\xc0\x86\x80\x80\x01\xff\xff'
+    ping = 159
+    length = 98
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'shon_archer'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,MoHax-xaM,\x8b\x809\x01\x01\x01\x01\x0f\xff]\x02\x02\xff\x04M\xff\xff\xff\xff\xff\xff\xff\xff\xff\xffZ\xe0\x96\x80\x80\x01\xff\xff'
+    ping = 503
+    length = 101
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'mortey123'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,IdeclerWar,\x8b\x809\x03\x02\x02\x025\xffQ\x02\x02\xff\x02M\xff\xff\xff\xff\xff\xff\xff\xff\xff\xffR\xe0\x9e\x80\x80\x01\xff\xff'
+    ping = 25
+    length = 100
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'esper-zero'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,esper_one,\x8b\x80\xff\x03\x02\x02\x02\x13\xffQ\x02\x02\xff\x02\xff\xff\xff\xff\xff*\xff\xff\xff\xff\xffW\xe0\x9e\x80\x80\x01\xff\xff'
+    ping = 133
+    length = 100
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'mordorr'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,Exly,\x8b\x809\x02\x01\x01\x01\x0f\xffO\x02\x02\xff\x02MFFFF\xff\xff\x02FF\xffY\xe0\x9e\x80\x80\x01\xff\xff'
+    ping = 360
+    length = 92
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'karju'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,ziro_cool,\x8b\x809\x02\x01\x01\x015\xffQ\x02\x02\xff\x02MFFFF\xa5\xff\xffFF\xff^\xe0\x9e\x80\x80\x01\xff\xff'
+    ping = 14
+    length = 95
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'aksinion1'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,UT_PVP,\x8b\x80=\x02\x01\x01\x01\x14\xff^\x02\x02\xff\x04\xe2\xff\xff\xff\xff\xff\xff\xff\xff\xff\xffO\xe0\x9e\x80\x80\x01\xff\xff'
+    ping = 57
+    length = 96
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'moxito1'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,Moxito,\x8b\x80\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xffZ\xe0\x9e\x80\x80\x01\xff\xff'
+    ping = 69
+    length = 94
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'xxqawerxx[cl]'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b"PX2DRubattle.net,xxQaWeRxxCl,\x8b\x80?\x01\x02\x02\x01\x19\xffQ\x02\x02\xff\x02'\xeb\xeb\xeb\xeb&\xff\x06\xeb\xeb\xffL\xc0\x98\x80\x80\x01\xff\xff"
+    ping = 24
+    length = 105
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'longpunk'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,KenyArkana,\x8b\x80?\x03\x01\x01\x015\xffO\x03\x03\xff\x023TTTT\xb3\xff\tTT\xffQ\xe0\x9e\x80\x80\x01\xff\xff'
+    ping = 29
+    length = 99
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'damunikk'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,Face-Controle,\x8b\x809\x02\x02\x03\x01\x0b\xff\xff\x03\x03`\x03M\xff\xff\xff\xff5\xff\xff\xff\xff\xffT\xe0\x9a\x80\x80\x01\xff\xff'
+    ping = 161
+    length = 102
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'cc_mx'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,Blizzard_Expert,\x8b\x80?\x02\x03\x03\x03\x13\xffQ\x03\x03\xff\x023\x13\x13\x13\x13*\xff\x06\x13\x13\xffX\xe0\x9e\x80\x80\x01\xff\xff'
+    ping = 45
+    length = 101
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'mir[]n'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,sora_M,\x8b\x809\x03\x01\x01\x01\x0f\xffQ\x03\x03\xff\x02MTTTT\xff\xff\xffTT\xff[\xe0\x9a\x80\x80\x01\xff\xff'
+    ping = 11
+    length = 93
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'dozhd73'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,StoryOfTheYear,\x8b\x80S\x01\x02\x02\x01\x04\xffQ\x02\x02\xff\x05\xed\xff\xff\xff\xff\xff\xff\xff\xff\xff\xffY\xe0\x9e\x80\x80\x01\xff\xff'
+    ping = 15
+    length = 102
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'ramdis'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,The_Goon,\x8b\x809\x02\x02\x03\x01\x0f\xff\\\x03\x03\xff\x04M\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff`\xe4\x9e\x80\x80\x01\xff\xff'
+    ping = 12
+    length = 95
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'-dano-'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,DANOTELO,\x8b\x80\xff\x03\x01\x01\x01\xff\xff]\x03\x03\xff\x04\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xffE\xe4\x9e\x80\x80\x01\xff\xff'
+    ping = 45
+    length = 95
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'ethiopia'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,Milo,\x8b\x80S\x01\x02\x02\x01\x19\xffT\x02\x02\xff\x02\xea\xea\xea\xea\xea&\xff\t\xea\xea\xff\\\xc0\x98\x80\x80\x01\xff\xff'
+    ping = 250
+    length = 93
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'rynki23'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,Dj-ZeAl,\x8b\x80\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\x04\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xffG\xe0\x9a\x80\x80\x01\xff\xff'
+    ping = 45
+    length = 95
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'likeboss'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,Gorwok,\x8b\x809\x02\x02\x02\x02\x05\xff\\\x03\x03\xff\x04M\xff\xff\xff\xff\xff\xff\xff\xff\xff\xffN\xe0\x9a\x80\x80\x01\xff\xff'
+    ping = 27
+    length = 95
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'oil_potion'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,oil_potion,\x8b\x809\x03\x01\x01\x01\x0f\xff\\\x03\x03\xff\x04M\xff\xff\xff\xff\xff\xff\xff\xff\xff\xffY\xe0\x9a\x80\x80\x01\xff\xff'
+    ping = 4
+    length = 101
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'D1a'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,fromlugansk,\x8b\x809\x02\x03\x03\x03\x13\xffQ\x03\x03\xff\x02M\x13\x13\x13\x13*\xff\xff\x13\x13\xff]\xe0\x9e\x80\x80\x01\xff\xff'
+    ping = 36
+    length = 95
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'toxavip1'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,MyzuK,\x8b\x80[\xff\xff\xff\xff\xff\xffQ\xff\xff\xff\x05\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xffQ\xe0\x9e\x80\x80\x01\xff\xff'
+    ping = 26
+    length = 94
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'nfs_spb'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,F_nI,\x8b\x80\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\x02\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\x03\xe0\x96\x80\x80\x01\xff\xff'
+    ping = 14
+    length = 92
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'done_omar'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,SWEEPERS,\x8b\x809\x01\x01\x01\x01\x1c\xffQ\x02\x02\xff\x01M\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\\\xe4\x9a\x80\x80\x01\xff\xff'
+    ping = 38
+    length = 98
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'anicool'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,ANOG_CLASSIC,\x8b\x80<\x01\x02\x02\x01\x19\xffQ\x02\x02\xff\x02\xff\xeb\xeb\xeb\xeb&\xff\x06\xeb\xeb\xffD\xc0\x96\x80\x80\x01\xff\xff'
+    ping = 5
+    length = 100
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'gnBL2'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,RUNE_BARIGAN,\x8b\x80\xff\xff\xff\xff\xff\x04\xffO\xff\xff\xff\x05\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\xe0\x80\x80\x80\x01\xff\xff'
+    ping = 15
+    length = 98
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'777chel777'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,ZoloTiE_YaicA,\x8b\x80[\x01\x01\x01\x01\x13\x13\xff\x02\x02\xff\x05\xa2\xff\xff\xff\xff**\xff\xff\xff\xff_\xe0\x9e\x80\x80\x01\xff\xff'
+    ping = 774
+    length = 104
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'ache07'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,xxANAHITxx,\x8b\x809\x02\x02\x03\x01\x0f\xff\\\x03\x03\xff\x04M\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff`\xe0\x9e\x80\x80\x01\xff\xff'
+    ping = 113
+    length = 97
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'leshiy_wrx'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,Gremlin_wrx,\x8b\x80?\x02\x03\x03\x035\xffQ\x03\x03\xff\x023\x13\x13\x13\x13\xb3\xff\x06\x13\x13\xffY\xe0\x9e\x80\x80\x01\xff\xff'
+    ping = 10
+    length = 102
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'st-gt'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,MaskaeV,\x8b\x80<\x02\x02\x02\x02\x11\xffT\x03\x03\xff\x03\xff\xe9\xe9\xe9\xe9\xff\xff\x13\xe9\xe9\xff\x12\xe0\x86\x80\x80\x01\xff\xff'
+    ping = 12
+    length = 93
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'CH3NH23'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,ttrrtt,\x8b\x80\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\x05\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\xe0\x80\x80\x80\x01\xff\xff'
+    ping = 35
+    length = 94
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'my.java'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,Mistiness,\x8b\x80;\x02\x01\x01\x01\xff)\xff\x02\x02\xff\x01\xff\xff\xff\xff\xff\xff\xaf\xff\xff\xff\xff\n\xe4\x96\x80\x80\x01\xff\xff'
+    ping = 476
+    length = 97
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'A.Ukupnik777'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,Tugoy_Luk,\x8b\x80?\x02\x02\x03\x01\xff0\xff\x03\x03\xff\x01)\xff\xff\xff\xff\xff\xaf\xff\xff\xff\xffZ\xe0\x9e\x80\x80\x01\xff\xff'
+    ping = 12
+    length = 102
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'jd1'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,jd_runes,\x8b\x80\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\x01\xe0\x9a\x80\x80\x01\xff\xff'
+    ping = 413
+    length = 92
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'arx_hamm'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,ArX-Hamm,\x8b\x809\x02\x02\x03\x01\x0f\xff]\x03\x03\xff\x04M\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff^\xe0\x9e\x80\x80\x01\xff\xff'
+    ping = 40
+    length = 97
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'porky_pig'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,up_yours,\x8b\x80=\x01\x01\x01\x01\x0f\xffQ\x02\x02\xff\x02\xe7DDDD\xff\xff\xffDD\xffX\xe0\x9e\x80\x80\x01\xff\xff'
+    ping = 57
+    length = 98
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'capitollium'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,Anoxia,\x8b\x809\x03\x02\x02\x02\x0f\xffQ\x02\x02\xff\x02M\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff`\xe4\x9e\x80\x80\x01\xff\xff'
+    ping = 32
+    length = 98
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'ordalion'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,Gateways,\x8b\x80Y\x01\x01\x01\x01\x0f\x0f\xff\x02\x02\xff\x05\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xffS\xe4\x9e\x80\x80\x01\xff\xff'
+    ping = 30
+    length = 97
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'TechMar1ne'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,Blizz_Tech,\x8b\x80:\x02\x01\x01\x01\x13\xffT\x02\x02\xff\x02TFFFF*\xff\x11FF\xff,\xe0\x8c\x80\x80\x01\xff\xff'
+    ping = 161
+    length = 101
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'leshiy_slk'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,rpeMJLuH_PvM,\x8b\x809\xff\xff\xff\xff5\xff\xff\xff\xff\xff\x02B\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff/\xe0\x90\x80\x80\x01\xff\xff'
+    ping = 54
+    length = 103
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'gul_rune'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,GUL_RUNA,\x8b\x80S\x01\x02\x02\x01\x19\xffU\x02\x02\xff\x02\xf1\xeb\xeb\xeb\xeb&\xff\xff\xeb\xeb\xffN\xc0\x98\x80\x80\x01\xff\xff'
+    ping = 115
+    length = 97
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'rr-1'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,vasek_A,\x8b\x80\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\x04\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\x02\xe0\x96\x80\x80\x01\xff\xff'
+    ping = 36
+    length = 92
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'AHTOH_COCKOB'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,HOCOB,\x8b\x80=\x03\x02\x02\x02\x0f\xff\\\x02\x02\xff\x04\xe2\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff-\xe0\x8a\x80\x80\x01\xff\xff'
+    ping = 22
+    length = 98
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'Dark_wanderer'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,Dark_mag,\x8b\x80\xff\x02\x01\x02\x02\r\xffQ\x02\x02\xff\x03\xff\xff\xff\xff\xff4\xff\x06\xff\xff\xffZ\xe0\x9e\x80\x80\x01\xff\xff'
+    ping = 77
+    length = 102
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'xxqawerxx'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,QaWeRnewx,\x8b\x80\xff\xff\xff\xff\xff\r\xffQ\xff\xff\xff\x02\xff\xff\xff\xff\xff1\xff\xff\xff\xff\xff]\xe0\x9e\x80\x80\x01\xff\xff'
+    ping = 117
+    length = 99
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'bigwig'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,BigWig,\x8b\x80=\x02\x02\x03\x01\x14\xff]\x03\x03\xff\x04\xe2\xff\xff\xff\xff\xff\xff\xff\xff\xff\xffZ\xe0\x9e\x80\x80\x01\xff\xff'
+    ping = 15
+    length = 93
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'romka1234'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,Night-Evenger,\x8b\x80=\x01\x02\x02\x01\x14\xff]\x02\x02\xff\x04\xe2\xff\xff\xff\xff"\xff\xff\xff\xff\xffZ\xe0\x9e\x80\x80\x01\xff\xff'
+    ping = 239
+    length = 103
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b'icodidoza'
+    registration_authority = 3131961357
+    event_id = 'ID_USER'
+    text = b'PX2DRubattle.net,BiG_BadWolF,\x8b\x80\xff\xff\xff\xff\xff\x0c\xffO\xff\xff\xff\x06\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\x05\xe0\x9a\x80\x80\x01\xff\xff'
+    ping = 180
+    length = 101
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b''
+    registration_authority = 3131961357
+    event_id = 'ID_INFO'
+    text = b'Obey the law, rules are the law!'
+    ping = 0
+    length = 62
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b''
+    registration_authority = 3131961357
+    event_id = 'ID_INFO'
+    text = b'Hello pohmelie9, welcome to Rubattle.net!'
+    ping = 0
+    length = 71
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b''
+    registration_authority = 3131961357
+    event_id = 'ID_INFO'
+    text = b'This server is hosted by RopNet.'
+    ping = 0
+    length = 62
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b''
+    registration_authority = 3131961357
+    event_id = 'ID_INFO'
+    text = b' '
+    ping = 0
+    length = 31
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b''
+    registration_authority = 3131961357
+    event_id = 'ID_INFO'
+    text = b'There are currently 373 users in 131 games of Diablo II Lord of Destruction, and 2087 users in 474 games and 94 channels.'
+    ping = 0
+    length = 151
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b''
+    registration_authority = 3131961357
+    event_id = 'ID_INFO'
+    text = b'You have no mail.'
+    ping = 0
+    length = 47
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b''
+    registration_authority = 3131961357
+    event_id = 'ID_ERROR'
+    text = b'All accounts that was played with cheats will be erased!'
+    ping = 0
+    length = 86
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b''
+    registration_authority = 3131961357
+    event_id = 'ID_ERROR'
+    text = b'Any advertise/discussion about cheats and resources that contains/supports illegal software, including cheat-based servers, are strongly prohibited and will lead to account closure. You are warned.'
+    ping = 0
+    length = 227
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b''
+    registration_authority = 3131961357
+    event_id = 'ID_INFO'
+    text = b'Technical support: support@rubattle.net'
+    ping = 0
+    length = 69
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b''
+    registration_authority = 3131961357
+    event_id = 'ID_INFO'
+    text = b'Enjoy!'
+    ping = 0
+    length = 36
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b''
+    registration_authority = 3131961357
+    event_id = 'ID_INFO'
+    text = b'Last login: Thu Apr 25 16:41 2013'
+    ping = 0
+    length = 63
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:11] [d-chat.py] Chat event 
+Container:
+    username = b''
+    registration_authority = 3131961357
+    event_id = 'ID_INFO'
+    text = b'Diablo II topic: Our forum - http://www.rubattle.net/forums/diablo_2/'
+    ping = 0
+    length = 99
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:15] [d-chat.py] Chat event 
+Container:
+    username = b'romka1234'
+    registration_authority = 3131961357
+    event_id = 'ID_USERFLAGS'
+    text = b'PX2DRubattle.net,Night-Evenger,\x8b\x80=\x01\x02\x02\x01\x14\xff]\x02\x02\xff\x04\xe2\xff\xff\xff\xff"\xff\xff\xff\xff\xffZ\xe0\x9e\x80\x80\x01\xff\xff'
+    ping = 142
+    length = 103
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:17] [d-chat.py] Chat event 
+Container:
+    username = b'ant240807'
+    registration_authority = 3131961357
+    event_id = 'ID_JOIN'
+    text = b'PX2DRubattle.net,Counter_Striker,\x8b\x80\xff\x01\x02\x02\x01\xff7\xff\x02\x02\xff\x01\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xffa\xe0\x9a\x80\x80\x01\xff\xff'
+    ping = 187
+    length = 105
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:20] [d-chat.py] Chat event 
+Container:
+    username = b'rebusy'
+    registration_authority = 3131961357
+    event_id = 'ID_JOIN'
+    text = b'PX2DRubattle.net,Prime_Time,\x8b\x809\x02\x01\x01\x01\x0f\xff]\x02\x02\xff\x04MFFFF\xff\xff\xffFF\xffZ\xe0\x9e\x80\x80\x01\xff\xff'
+    ping = 39
+    length = 97
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:21] [d-chat.py] Chat event 
+Container:
+    username = b'T_R_O_Y'
+    registration_authority = 3131961357
+    event_id = 'ID_JOIN'
+    text = b'PX2DRubattle.net,Cold_OG,\x8b\x809\x02\x01\x01\x015\xffO\x02\x02\xff\x02MFFFF\xff\xff\xffFF\xffY\xe0\x9e\x80\x80\x01\xff\xff'
+    ping = 243
+    length = 95
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:21] [d-chat.py] Chat event 
+Container:
+    username = b'damunikk'
+    registration_authority = 3131961357
+    event_id = 'ID_TALK'
+    text = b'parni 4e slowno runki nazvatb'
+    ping = 161
+    length = 67
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'
+[17:44:23] [d-chat.py] Chat event 
+Container:
+    username = b'rebusy'
+    registration_authority = 3131961357
+    event_id = 'ID_LEAVE'
+    text = b''
+    ping = 39
+    length = 36
+    account_number = 233876922
+    user_flags = 0
+    packet_id = 'SID_CHATEVENT'
+    ip_address = '0.0.0.0'

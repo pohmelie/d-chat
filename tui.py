@@ -1,5 +1,6 @@
 import urwid
-import time
+import bnet
+import logging
 
 
 class ChatWalker(urwid.ListWalker):
@@ -56,14 +57,10 @@ class ChatWalker(urwid.ListWalker):
         urwid.ListWalker._modified(self)
 
 
-class Tab():
-    def __init__(self, desc="", view=None):
-        self.desc = desc
-        self.view = view
+class Tui(bnet.Bnet):
+    def __init__(self, host, port):
+        bnet.Bnet.__init__(self, host, port)
 
-
-class Tui():
-    def __init__(self):
         self.chat = ChatWalker()
         self.inpu = urwid.Edit(caption=("input", "> "), wrap="clip")
 
@@ -85,70 +82,5 @@ class Tui():
             ("blue", "system"),
         )
 
-        self.tabs = [Tab("main", self.chat.get_view())]
-        self.current_tab = 0
-
-        self.players_count = 0
-
-
     def on_input(self, key):
-        if key == "ctrl x":
-            raise urwid.ExitMainLoop()
-
-        elif key == "ctrl up":
-            self.chat.up()
-
-        elif key == "ctrl down":
-            self.chat.down()
-
-        elif key == "page up":
-            self.chat.up(10)
-
-        elif key == "page down":
-            self.chat.down(10)
-
-        elif key == "ctrl home":
-            self.chat.home()
-
-        elif key == "ctrl end":
-            self.chat.end()
-
-        elif key == "enter":
-            pass
-            #self.login_error("yoba", 0)
-
-    def get_time(self):
-        return ("time", time.strftime("[%H:%M:%S]"))
-
-    def login_error(self, packet_id, retcode):
-        self.chat.push(
-            urwid.Text([
-                self.get_time(),
-                " ",
-                ("red", "error on '{}' with retcode = {}".format(packet_id, retcode))
-            ])
-        )
-
-    def chat_event(self, packet):
-        self.chat.push(
-            urwid.Text([
-                self.get_time(),
-                " ",
-                packet.event_id,
-                " ",
-                "[{}]".format(packet.username)
-            ])
-        )
-        return
-
-        if packet.event_id in ("ID_USER", "ID_JOIN"):
-            self.players_count = self.players_count + 1
-
-        elif packet.event_id in ("ID_LEAVE"):
-            self.players_count = self.players_count - 1
-
-if __name__ == "__main__":
-    tui = Tui()
-    loop = urwid.MainLoop(tui.frame, palette=tui.palette, handle_mouse=False, unhandled_input=tui.on_input)
-    tui.chat_box.set_title("yoba")
-    loop.run()
+        pass
