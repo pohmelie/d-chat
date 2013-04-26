@@ -1,3 +1,4 @@
+import bnet
 import tui
 import urwid
 import logging
@@ -5,31 +6,26 @@ import sys
 import time
 
 
-class Dchat(tui.Tui):
+class Dchat(bnet.Bnet, tui.Tui):
     def __init__(self, host, port):
-        tui.Tui.__init__(self, host, port)
+        bnet.Bnet.__init__(self, host, port)
+        tui.Tui.__init__(self)
+
+        self.navigation = {
+            "ctrl up":self.chat.up,
+            "ctrl down":self.chat.down,
+            "page up":lambda: self.chat.up(10),
+            "page down":lambda: self.chat.down(10),
+            "ctrl home":self.chat.home,
+            "ctrl end":self.chat.end,
+        }
 
     def on_input(self, key):
-        if key == "ctrl x":
+        if key in self.navigation:
+            self.navigation[key]()
+
+        elif key == "ctrl x":
             raise urwid.ExitMainLoop()
-
-        elif key == "ctrl up":
-            self.chat.up()
-
-        elif key == "ctrl down":
-            self.chat.down()
-
-        elif key == "page up":
-            self.chat.up(10)
-
-        elif key == "page down":
-            self.chat.down(10)
-
-        elif key == "ctrl home":
-            self.chat.home()
-
-        elif key == "ctrl end":
-            self.chat.end()
 
         elif key == "enter":
             pass
@@ -67,7 +63,7 @@ class Dchat(tui.Tui):
 
 
 if len(sys.argv) < 3:
-    print("Usage: d-chat.py nickname password")
+    print("Usage: d-chat.py nickname password\n")
     exit()
 
 logging.basicConfig(

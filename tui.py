@@ -1,5 +1,4 @@
 import urwid
-import bnet
 import logging
 
 
@@ -57,10 +56,8 @@ class ChatWalker(urwid.ListWalker):
         urwid.ListWalker._modified(self)
 
 
-class Tui(bnet.Bnet):
-    def __init__(self, host, port):
-        bnet.Bnet.__init__(self, host, port)
-
+class Tui():
+    def __init__(self):
         self.chat = ChatWalker()
         self.inpu = urwid.Edit(caption=("input", "> "), wrap="clip")
 
