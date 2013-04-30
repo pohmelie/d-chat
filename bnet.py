@@ -28,7 +28,11 @@ class Bnet():
         self.head = b""
 
         self.sock = socket()
-        self.sock.connect((self.host, self.port))
+        try:
+            self.sock.connect((self.host, self.port))
+        except:
+            self.login_error("Connecting to server")
+            return
 
         self.sock.sendall(b"\x01")
         self.sock.sendall(
@@ -157,7 +161,34 @@ class Bnet():
                 )
 
             elif pack.packet_id == "SID_CHATEVENT":
-                self.chat_event(pack)
+                if packet.event_id in ("ID_USER", "ID_JOIN"):
+                    text = str(packet.text, "ascii")
+                    nickname = ""
+                    if text.startswith("PX2D"):
+                        text = text.split(",")
+                        if len(text) > 2:
+                            nickname = text[1]
+                    self.nicknames[str(packet.username)] = nickname
+
+                elif packet.event_id in ("ID_LEAVE",):
+                    del self.nicknames[str(packet.username)]
+
+                elif packet.event_id in ("ID_INFO",):
+                    self.push_text(("blue", str(packet.text)))
+
+                elif packet.event_id in ("ID_ERROR",):
+                    self.push_text(("red", str(packet.text)))
+
+                elif packet.event_id in ("ID_TALK",):
+                    self.push_text(
+                        ("nickname", self.nicknames[str(packet.username)] + "*" + str(packet.username)),
+                        ": " + str(packet.text),
+                    )
+
+                else:
+                    logging.info("[d-chat.py] unhandled chat event\n{}".format(packet))
+
+                self.chat_event()
 
             else:
-                logging.info("[bnet.py] Unused packet \n{}".format(pack))
+                logging.info("[bnet.py] unhandled packet\n{}".format(pack))

@@ -78,6 +78,3 @@ class Tui():
             ("red", "light red", "default"),
             ("blue", "system"),
         )
-
-    def on_input(self, key):
-        pass
