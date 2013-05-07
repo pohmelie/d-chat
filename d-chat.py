@@ -6,10 +6,13 @@ import sys
 import time
 
 
-class Dchat(bnet.Bnet, tui.Tui):
+class Dchat():
     def __init__(self, host, port):
-        bnet.Bnet.__init__(self, host, port)
-        tui.Tui.__init__(self)
+        self.views = [("main", tui.ChatView())]
+        self.current_view = 0
+
+        self.bnet = bnet.Bnet(host, port, self.login_error, self.chat_event)
+        self.tui = tui.Tui(self.views[self.current_view][1])
 
         self.nicknames = {}
         self.navigation = {

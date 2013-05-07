@@ -2,22 +2,11 @@ import urwid
 import logging
 
 
-class ChatWalker(urwid.ListWalker):
+class ChatView():
     def __init__(self, max_size=1000):
-        urwid.ListWalker.__init__(self)
-
         self.max_size = max_size
-        self.focus = 0
-
         self.shift = 0
         self.lines = ()
-
-    def get_view(self):
-        return (self.max_size, self.shift, self.lines)
-
-    def set_view(self, view):
-        self.max_size, self.shift, self.lines = view
-        urwid.ListWalker._modified(self)
 
     def __getitem__(self, position):
         return self.lines[-position - self.shift - 1]
@@ -26,8 +15,6 @@ class ChatWalker(urwid.ListWalker):
         self.lines = (self.lines + objs)[-self.max_size:]
         if self.shift != 0:
             self.shift = self.shift + len(objs)
-        else:
-            urwid.ListWalker._modified(self)
 
     def next_position(self, position):
         if position <= 0:
@@ -41,24 +28,37 @@ class ChatWalker(urwid.ListWalker):
 
     def up(self, count=1):
         self.shift = max(0, min(len(self.lines) - 1, self.shift + count))
-        urwid.ListWalker._modified(self)
 
     def down(self, count=1):
         self.shift = max(0, self.shift - count)
-        urwid.ListWalker._modified(self)
 
     def home(self):
         self.shift = len(self.lines) - 1
-        urwid.ListWalker._modified(self)
 
     def end(self):
         self.shift = 0
+
+
+class ChatWalker(urwid.ListWalker):
+    def __init__(self, view):
+        urwid.ListWalker.__init__(self)
+
+        self.focus = 0
+        self.view = view
+
+    def set_view(self, view):
+        self.view = view
+        self.__getitem__ = self.view.__getitem__
+        self.next_position = self.view.next_position
+        self.prev_position = self.view.prev_position
+
+    def refresh(self):
         urwid.ListWalker._modified(self)
 
 
 class Tui():
-    def __init__(self):
-        self.chat = ChatWalker()
+    def __init__(self, view):
+        self.chat = ChatWalker(view)
         self.inpu = urwid.Edit(caption=("input", "> "), wrap="clip")
 
         self.chat_box = urwid.LineBox(urwid.ListBox(self.chat))
@@ -78,3 +78,7 @@ class Tui():
             ("red", "light red", "default"),
             ("blue", "system"),
         )
+
+    def set_view(self, view):
+        self.caht.set_view(view)
+        self.inpu.set_

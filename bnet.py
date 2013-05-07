@@ -11,15 +11,12 @@ from bnutil import check_revision, hash_d2key, sub_double_hash, bsha1
 
 
 class Bnet():
-    def __init__(self, host, port):
+    def __init__(self, host, port, login_error=None, chat_event=None):
         self.host = host
         self.port = port
 
-    def login_error(self, packet_id, retcode):
-        pass
-
-    def chat_event(self, packet):
-        pass
+        self.login_error = login_error or lambda packet_id, retcode: pass
+        self.chat_event = chat_event or lambda packet: pass
 
     def login(self, username, password):
         self.username = bytes(username, "ascii")
@@ -161,34 +158,7 @@ class Bnet():
                 )
 
             elif pack.packet_id == "SID_CHATEVENT":
-                if packet.event_id in ("ID_USER", "ID_JOIN"):
-                    text = str(packet.text, "ascii")
-                    nickname = ""
-                    if text.startswith("PX2D"):
-                        text = text.split(",")
-                        if len(text) > 2:
-                            nickname = text[1]
-                    self.nicknames[str(packet.username)] = nickname
-
-                elif packet.event_id in ("ID_LEAVE",):
-                    del self.nicknames[str(packet.username)]
-
-                elif packet.event_id in ("ID_INFO",):
-                    self.push_text(("blue", str(packet.text)))
-
-                elif packet.event_id in ("ID_ERROR",):
-                    self.push_text(("red", str(packet.text)))
-
-                elif packet.event_id in ("ID_TALK",):
-                    self.push_text(
-                        ("nickname", self.nicknames[str(packet.username)] + "*" + str(packet.username)),
-                        ": " + str(packet.text),
-                    )
-
-                else:
-                    logging.info("[d-chat.py] unhandled chat event\n{}".format(packet))
-
-                self.chat_event()
+                self.chat_event(pack)
 
             else:
                 logging.info("[bnet.py] unhandled packet\n{}".format(pack))
