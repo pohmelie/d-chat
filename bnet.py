@@ -15,8 +15,8 @@ class Bnet():
         self.host = host
         self.port = port
 
-        self.login_error = login_error or lambda packet_id, retcode: pass
-        self.chat_event = chat_event or lambda packet: pass
+        self.login_error = login_error or (lambda packet_id, retcode: None)
+        self.chat_event = chat_event or (lambda packet: None)
 
     def login(self, username, password):
         self.username = bytes(username, "ascii")
@@ -104,7 +104,7 @@ class Bnet():
 
             elif pack.packet_id == "SID_AUTH_CHECK":
                 if pack.result != 0:
-                    logging.info("[bnet.py] Not zero result on \n{}".format(pack))
+                    logging.info("[bnet.py] Non-zero result on \n{}".format(pack))
                     self.login_error(pack.packet_id, pack.result)
                 else:
                     self.sock.sendall(
@@ -125,7 +125,7 @@ class Bnet():
 
             elif pack.packet_id == "SID_LOGONRESPONSE2":
                 if pack.result != 0:
-                    logging.info("[bnet.py] Not zero result on \n{}".format(pack))
+                    logging.info("[bnet.py] Non-zero result on \n{}".format(pack))
                     self.login_error(pack.packet_id, pack.result)
                 else:
                     self.sock.sendall(
