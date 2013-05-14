@@ -1,24 +1,40 @@
 import urwid
+import collections
 
 
-class ChatView():
-    def __init__(self, title_format="", max_size=1000):
-        self.max_size = max_size
+class ChatWalker(urwid.ListWalker):
+    def __init__(self):
+        urwid.ListWalker.__init__(self)
+        self.focus = 0
         self.shift = 0
-        self.lines = ()
-        self.title_format = title_format
-        self.title = "Testing..."
+        self.all_messages = collections.deque(maxlen=10000)
+        self.whisper_messages = collections.deque(maxlen=1000)
+        self.lines = self.all_messages
 
     def __getitem__(self, position):
         return self.lines[-position - self.shift - 1]
 
-    def set_title(self, *args):
-        self.title = self.title_format.format(*args)
+    def push(self, *args, **kwargs):
+        widget = urwid.Text(list(args))
+        whisper = kwargs.get("whisper", False)
 
-    def push(self, *objs):
-        self.lines = (self.lines + (urwid.Text(list(objs)),))[-self.max_size:]
-        if self.shift != 0:
-            self.shift = self.shift + len(objs)
+        if whisper:
+            self.whisper_messages.append(widget)
+        self.all_messages.append(widget)
+
+        if (whisper or self.lines is self.all_messages) and self.shift != 0:
+            self.up()
+
+        self.refresh()
+
+    def switch(self):
+        if self.lines is self.all_messages:
+            self.lines = self.whisper_messages
+        else:
+            self.lines = self.all_messages
+
+        self.shift = 0
+        self.refresh()
 
     def next_position(self, position):
         if position <= 0:
@@ -42,22 +58,6 @@ class ChatView():
     def end(self):
         self.shift = 0
 
-
-class ChatWalker(urwid.ListWalker):
-    def __init__(self):
-        urwid.ListWalker.__init__(self)
-        self.focus = 0
-        self.view = None
-
-    def __getitem__(self, position):
-        if self.view:
-            return self.view[position]
-
-    def set_view(self, view):
-        self.view = view
-        self.next_position = view.next_position
-        self.prev_position = view.prev_position
-
     def refresh(self):
         urwid.ListWalker._modified(self)
 
@@ -77,19 +77,13 @@ class Tui():
 
         self.palette = (
             ("time", urwid.LIGHT_BLUE, urwid.DEFAULT),
+            ("whisper time", urwid.LIGHT_RED, urwid.DEFAULT),
+            ("whisper", urwid.LIGHT_GREEN, urwid.DEFAULT),
             ("system", urwid.LIGHT_CYAN, urwid.DEFAULT),
             ("nickname", urwid.DARK_GREEN, urwid.DEFAULT),
+            #("nickname", urwid.BROWN, urwid.DEFAULT),
             ("text", urwid.WHITE, urwid.DEFAULT),
             ("input", urwid.WHITE, urwid.DEFAULT),
             ("red", urwid.LIGHT_RED, urwid.DEFAULT),
             ("delimiter", urwid.BROWN, urwid.DEFAULT),
         )
-
-    def set_view(self, view):
-        self.view = view
-        self.chat.set_view(view)
-        self.refresh()
-
-    def refresh(self):
-        self.chat_box.set_title(self.view.title)
-        self.chat.refresh()

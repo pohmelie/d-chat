@@ -51,6 +51,16 @@ class Bnet():
             )
         )
 
+    def say(self, msg):
+        self.sock.sendall(
+            spacket.build(
+                Container(
+                    packet_id="SID_CHATCOMMAND",
+                    text=bytes(msg, "utf-8"),
+                )
+            )
+        )
+
     def on_packet(self):
         unparsed = rpackets.parse(self.head + self.sock.recv(2 ** 16))
         self.head = unparsed.tail

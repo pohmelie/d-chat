@@ -25,6 +25,7 @@ _spacket = Struct(
         SID_ENTERCHAT=0x0a,
         SID_GETCHANNELLIST=0x0b,
         SID_JOINCHANNEL=0x0c,
+        SID_CHATCOMMAND=0x0e,
     ),
     ULInt16("length"),
     Embed(
@@ -91,6 +92,10 @@ _spacket = Struct(
                     None,
                     ULInt32("unknown"),
                     CString("channel_name"),
+                ),
+                "SID_CHATCOMMAND": Struct(
+                    None,
+                    CString("text"),
                 ),
             }
         )
