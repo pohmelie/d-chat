@@ -76,13 +76,13 @@ class Tui():
         self.frame.set_focus_path(("footer",))
 
         self.palette = (
-            ("time", urwid.LIGHT_BLUE, urwid.BLACK),
-            ("system", urwid.LIGHT_CYAN, urwid.BLACK),
-            ("nickname", urwid.DARK_GREEN, urwid.BLACK),
-            ("text", urwid.WHITE, urwid.BLACK),
-            ("input", urwid.WHITE, urwid.BLACK),
-            ("red", urwid.LIGHT_RED, urwid.BLACK),
-            ("delimiter", urwid.BROWN, urwid.BLACK),
+            ("time", urwid.LIGHT_BLUE, urwid.DEFAULT),
+            ("system", urwid.LIGHT_CYAN, urwid.DEFAULT),
+            ("nickname", urwid.DARK_GREEN, urwid.DEFAULT),
+            ("text", urwid.WHITE, urwid.DEFAULT),
+            ("input", urwid.WHITE, urwid.DEFAULT),
+            ("red", urwid.LIGHT_RED, urwid.DEFAULT),
+            ("delimiter", urwid.BROWN, urwid.DEFAULT),
         )
 
     def set_view(self, view):
