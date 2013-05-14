@@ -79,7 +79,10 @@ class Dchat():
             self.tui.chat.switch()
 
     def push(self, *args, **kwargs):
-        color = "whisper time" if kwargs.get("whisper", False) else "time"
+        if kwargs.get("whisper", False):
+            color = "whisper time"
+        else:
+            color = "time"
         self.tui.chat.push((color, time.strftime("[%H:%M:%S] ")), *args, **kwargs)
 
     def login_error(self, packet_id, retcode=None):
@@ -130,11 +133,11 @@ class Dchat():
             acc_name = str(packet.username, "utf-8")
             nick_name = self.nicknames.get(acc_name, "")
             self.push(
-                ("nickname", nick_name),
+                ("whisper nickname", nick_name),
                 ("delimiter", "*"),
-                ("nickname", acc_name),
+                ("whisper nickname", acc_name),
                 ("delimiter", " -> "),
-                ("nickname", "*" + self.account),
+                ("whisper nickname", "*" + self.account),
                 ("delimiter", ": "),
                 ("whisper", str(packet.text, "utf-8")),
                 whisper=True,
@@ -143,7 +146,6 @@ class Dchat():
         else:
             logging.info("[d-chat.py] unhandled chat event\n{}".format(packet))
 
-        #self.tui.chat.refresh()
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
