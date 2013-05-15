@@ -22,6 +22,7 @@ def insert_byte(buf, loc, b):
 
     buf[the_int] = replace_int
 
+
 def calc_hash_buffer(hash_data):
     hash_buffer = [0x67452301,
                    0xEFCDAB89,
@@ -53,6 +54,7 @@ def calc_hash_buffer(hash_data):
         i += 0x40
 
     return hash_buffer[:5]
+
 
 def do_hash(hash_buffer):
     buf = [0] * 0x50
@@ -132,6 +134,7 @@ def rol(num, shift):
     shift &= 0x1F
     return lshift(num, shift) | rshift(num, 32 - shift)
 
+
 def lshift(val, shift):
     if shift > 32:
         return 0
@@ -139,6 +142,7 @@ def lshift(val, shift):
         return 0
 
     return val << shift
+
 
 def rshift(val, shift):
     if shift > 32:

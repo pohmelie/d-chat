@@ -86,4 +86,5 @@ class Tui():
             ("input", urwid.WHITE, urwid.DEFAULT),
             ("red", urwid.LIGHT_RED, urwid.DEFAULT),
             ("delimiter", urwid.BROWN, urwid.DEFAULT),
+            ("autocomplete", urwid.DARK_GRAY, urwid.DEFAULT),
         )

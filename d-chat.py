@@ -9,22 +9,28 @@ import collections
 
 
 class Dchat():
-    def __init__(self, host, port, account, password):
+    DEFAULT_TITLE_FORMAT = "{channel} ({ppl}) [{shift}/{lines}]"
+
+    def __init__(self, host, port, account, password, title_format=None):
         self.account = account
         self.password = password
         self.channel = ""
+
+        self.title_format = title_format or Dchat.DEFAULT_TITLE_FORMAT
 
         self.bnet = bnet.Bnet(host, port, self.login_error, self.chat_event)
         self.tui = tui.Tui()
 
         self.nicknames = {}
+        self.autocomplete_dictionary = set()
+
         self.navigation = {
-            "ctrl up":lambda: self.tui.chat.up(),
-            "ctrl down":lambda: self.tui.chat.down(),
-            "page up":lambda: self.tui.chat.up(10),
-            "page down":lambda: self.tui.chat.down(10),
-            "ctrl home":lambda: self.tui.chat.home(),
-            "ctrl end":lambda: self.tui.chat.end(),
+            "ctrl up": lambda: self.tui.chat.up(),
+            "ctrl down": lambda: self.tui.chat.down(),
+            "page up": lambda: self.tui.chat.up(10),
+            "page down": lambda: self.tui.chat.down(10),
+            "ctrl home": lambda: self.tui.chat.home(),
+            "ctrl end": lambda: self.tui.chat.end(),
         }
 
     def run(self):
@@ -43,28 +49,17 @@ class Dchat():
         msg = self.tui.inpu.get_edit_text()
         self.tui.inpu.set_edit_text("")
 
-        curr_view = self.views[self.view_index]
-
-        if msg.starts_with("/w "):
-            pass
-
-        elif msg.starts_with("/"):
-            pass
-
-        else:
-            pass
-
         self.bnet.say(msg)
-        self.push(
-            ("delimiter", "*"),
-            ("nickname", self.account),
-            ("delimiter", ": "),
-            ("text", msg),
-        )
+
+        if not msg.startswith("/"):
+            self.push(
+                ("delimiter", "*"),
+                ("nickname", self.account),
+                ("delimiter", ": "),
+                ("text", msg),
+            )
 
     def on_input(self, key):
-        #self.push(key)
-
         if key in self.navigation:
             self.navigation[key]()
             self.tui.chat.refresh()
@@ -78,31 +73,46 @@ class Dchat():
         elif key == "ctrl w":
             self.tui.chat.switch()
 
+        elif key == "tab":
+            self.autocomplete()
+
+        self.refresh_title()
+
     def push(self, *args, **kwargs):
         if kwargs.get("whisper", False):
             color = "whisper time"
         else:
             color = "time"
+
+        def f(el):
+            if isinstance(el, tuple):
+                el = el[1]
+            return len(el) > 0
+
+        args = tuple(filter(f, args))
         self.tui.chat.push((color, time.strftime("[%H:%M:%S] ")), *args, **kwargs)
 
     def login_error(self, packet_id, retcode=None):
         if retcode is None:
-            msg = "error on '{}'".format(packet_id)
+            msg = str.format("error on '{}'", packet_id)
         else:
-            msg = "error on '{}' with retcode = {}".format(packet_id, retcode)
+            msg = str.format("error on '{}' with retcode = {}", packet_id, retcode)
 
         self.push(("red", msg))
         self.tui.chat.refresh()
 
     def chat_event(self, packet):
         if packet.event_id in ("ID_USER", "ID_JOIN", "ID_USERFLAGS"):
-            text = "".join(map(chr, itertools.takewhile(lambda ch: ch < 128, packet.text)))
-            nickname = ""
+            acc = str(packet.username, "utf-8")
+            nick = ""
+            text = str.join("", map(chr, itertools.takewhile(lambda ch: ch < 128, packet.text)))
             if text.startswith("PX2D"):
                 text = text.split(",")
                 if len(text) >= 2:
-                    nickname = text[1]
-            self.nicknames[str(packet.username, "utf-8")] = nickname
+                    nick = text[1]
+
+            self.nicknames[acc] = nick
+            self.autocomplete_dictionary.add(acc)
 
         elif packet.event_id in ("ID_LEAVE",):
             uname = str(packet.username, "utf-8")
@@ -116,26 +126,27 @@ class Dchat():
             self.push(("red", str(packet.text, "utf-8")))
 
         elif packet.event_id in ("ID_TALK", "ID_EMOTE"):
-            acc_name = str(packet.username, "utf-8")
-            nick_name = self.nicknames.get(acc_name, "")
+            acc = str(packet.username, "utf-8")
+            nick = self.nicknames.get(acc, "")
             self.push(
-                ("nickname", nick_name),
+                ("nickname", nick),
                 ("delimiter", "*"),
-                ("nickname", acc_name),
+                ("nickname", acc),
                 ("delimiter", ": "),
                 ("text", str(packet.text, "utf-8")),
             )
 
         elif packet.event_id in ("ID_CHANNEL",):
             self.channel = str(packet.text, "utf-8")
+            self.nicknames.clear()
 
         elif packet.event_id in ("ID_WHISPER",):
-            acc_name = str(packet.username, "utf-8")
-            nick_name = self.nicknames.get(acc_name, "")
+            acc = str(packet.username, "utf-8")
+            nick = self.nicknames.get(acc, "")
             self.push(
-                ("whisper nickname", nick_name),
+                ("whisper nickname", nick),
                 ("delimiter", "*"),
-                ("whisper nickname", acc_name),
+                ("whisper nickname", acc),
                 ("delimiter", " -> "),
                 ("whisper nickname", "*" + self.account),
                 ("delimiter", ": "),
@@ -143,8 +154,50 @@ class Dchat():
                 whisper=True,
             )
 
+        elif packet.event_id in ("ID_WHISPERSENT",):
+            acc = str(packet.username, "utf-8")
+            nick = self.nicknames.get(acc, "")
+            self.push(
+                ("whisper nickname", "*" + self.account),
+                ("delimiter", " -> "),
+                ("whisper nickname", nick),
+                ("delimiter", "*"),
+                ("whisper nickname", acc),
+                ("delimiter", ": "),
+                ("whisper", str(packet.text, "utf-8")),
+                whisper=True,
+            )
+
         else:
-            logging.info("[d-chat.py] unhandled chat event\n{}".format(packet))
+            logging.info(str.format("[d-chat.py] unhandled chat event\n{}", packet))
+
+        self.refresh_title()
+
+    def refresh_title(self):
+        self.tui.chat_box.set_title(
+            str.format(
+                self.title_format,
+                channel=self.channel,
+                ppl=len(self.nicknames),
+                shift=self.tui.chat.shift,
+                lines=len(self.tui.chat.lines),
+            )
+        )
+
+    def autocomplete(self):
+        end = self.tui.inpu.get_edit_text()
+        for sep in (" ", "*"):
+            end = str.split(end, sep)[-1]
+
+        passes = sorted(filter(lambda s: str.startswith(s, end), self.autocomplete_dictionary))
+
+        if len(passes) > 1:
+            self.push(("system", str.format("{} possibilities:", len(passes))))
+            for word in passes:
+                self.push(("autocomplete", word))
+
+        elif len(passes) == 1:
+            self.tui.inpu.insert_text(passes[0][len(end):])
 
 
 if __name__ == "__main__":

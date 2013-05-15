@@ -114,7 +114,7 @@ class Bnet():
 
             elif pack.packet_id == "SID_AUTH_CHECK":
                 if pack.result != 0:
-                    logging.info("[bnet.py] Non-zero result on \n{}".format(pack))
+                    logging.info(str.format("[bnet.py] Non-zero result on \n{}", pack))
                     self.login_error(pack.packet_id, pack.result)
                 else:
                     self.sock.sendall(
@@ -135,7 +135,7 @@ class Bnet():
 
             elif pack.packet_id == "SID_LOGONRESPONSE2":
                 if pack.result != 0:
-                    logging.info("[bnet.py] Non-zero result on \n{}".format(pack))
+                    logging.info(str.format("[bnet.py] Non-zero result on \n{}", pack))
                     self.login_error(pack.packet_id, pack.result)
                 else:
                     self.sock.sendall(
@@ -171,4 +171,4 @@ class Bnet():
                 self.chat_event(pack)
 
             else:
-                logging.info("[bnet.py] unhandled packet\n{}".format(pack))
+                logging.info(str.format("[bnet.py] unhandled packet\n{}", pack))

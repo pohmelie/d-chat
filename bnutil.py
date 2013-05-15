@@ -33,14 +33,14 @@ def check_revision(formula, mpq, path="d2xp"):
         var, expr = actions[i].split("=")
         actions[i] = var + "=(" + expr + ") % (1 << 32)"
 
-    actions = compile("\n".join(actions), "<string>", mode="exec")
+    actions = compile(str.join("\n", actions), "<string>", mode="exec")
 
     get_raw = lambda fname: open(os.path.join(path, fname), mode="rb", buffering=0).readall()
-    data = b"".join(map(get_raw, ("Game.exe", "Bnclient.dll", "D2Client.dll")))
-    nums = struct.unpack("{}I".format(len(data) // 4), data)
+    data = bytes.join(b"", map(get_raw, ("Game.exe", "Bnclient.dll", "D2Client.dll")))
+    nums = struct.unpack(str.format("{}I", len(data) // 4), data)
 
     env = {}
-    exec("\n".join(init), env)
+    exec(str.join("\n", init), env)
     env["A"] ^= mpq_hash
     for env["S"] in nums:
         exec(actions, env)
@@ -93,8 +93,8 @@ def hash_d2key(cdkey, client_token, server_token):
         if n >= 0x100:
             n -= 0x100
             checksum |= 1 << (i >> 1)
-        m_key[i] = "{:X}".format((n >> 4) & 0xf)
-        m_key[i + 1] = "{:X}".format(n & 0xf)
+        m_key[i] = str.format("{:X}", (n >> 4) & 0xf)
+        m_key[i + 1] = str.format("{:X}", n & 0xf)
 
     if reduce(lambda v, ch: v + (int(ch, 16) ^ (v * 2)), m_key, 3) & 0xff != checksum:
         return None, None  # invalid CD-key
@@ -111,7 +111,7 @@ def hash_d2key(cdkey, client_token, server_token):
         elif ord(m_key[i]) < ord("A"):
             m_key[i] = chr((i & 1) ^ ord(m_key[i]))
 
-    m_key = "".join(map(str, m_key))
+    m_key = str.join("", map(str, m_key))
 
     public_value = int(m_key[2:8], 16)
     hash_data = struct.pack(
@@ -126,28 +126,6 @@ def hash_d2key(cdkey, client_token, server_token):
 
     return public_value, bsha1(hash_data)
 
+
 def sub_double_hash(client_token, server_token, hashpass):
     return bsha1(struct.pack("2I20s", client_token, server_token, hashpass))
-
-if __name__ == "__main__":
-
-    from recipe import *
-
-    formula = b'A=803935755 B=3407199954 C=3485268447 4 A=A^S B=B+C C=C^A A=A-B'
-    mpq = b'ver-IX86-3.mpq'
-
-    print(check_revision(formula, mpq))
-
-    '''
-    server_token = 1180278819
-    cdkey = b"VK2ZRT8HCWJXB6RX"
-    #cdkey = b"TJ8ZBNRR6GNT6T2X"
-    client_token = 1372890262
-    _, pub, hashed = hash_d2key(cdkey, client_token, server_token)
-    print(pub, hashed) '''
-
-    cdkey = b"MKK46R7NC48M6PTV"
-    server_token = 0xb8997ed1
-    client_token = 0x00491244
-    pub, hashed = hash_d2key(cdkey, client_token, server_token)
-    print(pub, rev(hashed))
