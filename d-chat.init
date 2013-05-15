@@ -1,0 +1,6 @@
+\echo d-chat initialization file...
+\trade-timeout 600
+\trade-message \echo I'm trade message!
+\trade-info
+\echo Starting autotrade
+\trade-start

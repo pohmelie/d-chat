@@ -6,6 +6,7 @@ import sys
 import time
 import itertools
 import collections
+import autotrade
 
 
 class Dchat():
@@ -42,22 +43,45 @@ class Dchat():
             handle_mouse=False,
             unhandled_input=self.on_input
         )
+
+        self.trade = autotrade.AutoTrade(self.say, loop)
+        self.reload()
+
         loop.watch_file(self.bnet.sock, self.bnet.on_packet)
         loop.run()
 
-    def say(self):
-        msg = self.tui.inpu.get_edit_text()
-        self.tui.inpu.set_edit_text("")
+    def reload(self):
+        try:
+            for line in open("d-chat.init"):
+                if line.strip() != "":
+                    self.say(line.strip())
+        except:
+            self.say("\\echo Can't open or corrupted d-chat.init")
 
-        self.bnet.say(msg)
+    def say(self, msg):
+        if str.startswith(msg, "\\"):
+            for command in self.trade.commands:
+                if str.startswith(msg, command):
+                    self.trade.commands[command](msg)
 
-        if not msg.startswith("/"):
-            self.push(
-                ("delimiter", "*"),
-                ("nickname", self.account),
-                ("delimiter", ": "),
-                ("text", msg),
-            )
+            if str.startswith(msg, "\\echo"):
+                self.push(str.strip(msg[len("\\echo"):]))
+
+            if str.startswith(msg, "\\reload"):
+                self.reload()
+
+        else:
+            for i in range(0, len(msg), 200):
+                submsg = msg[i:i + 200]
+                self.bnet.say(submsg)
+
+                if not str.startswith(submsg, "/"):
+                    self.push(
+                        ("delimiter", "*"),
+                        ("nickname", self.account),
+                        ("delimiter", ": "),
+                        ("text", submsg),
+                    )
 
     def on_input(self, key):
         if key in self.navigation:
@@ -65,7 +89,8 @@ class Dchat():
             self.tui.chat.refresh()
 
         elif key == "enter":
-            self.say()
+            self.say(self.tui.inpu.get_edit_text())
+            self.tui.inpu.set_edit_text("")
 
         elif key == "ctrl x":
             raise urwid.ExitMainLoop()
@@ -106,7 +131,7 @@ class Dchat():
             acc = str(packet.username, "utf-8")
             nick = ""
             text = str.join("", map(chr, itertools.takewhile(lambda ch: ch < 128, packet.text)))
-            if text.startswith("PX2D"):
+            if str.startswith(text, "PX2D"):
                 text = text.split(",")
                 if len(text) >= 2:
                     nick = text[1]
@@ -135,6 +160,8 @@ class Dchat():
                 ("delimiter", ": "),
                 ("text", str(packet.text, "utf-8")),
             )
+
+            self.trade.activity_triggered()
 
         elif packet.event_id in ("ID_CHANNEL",):
             self.channel = str(packet.text, "utf-8")
@@ -213,4 +240,4 @@ if __name__ == "__main__":
         datefmt="[%H:%M:%S]",
     )
 
-    Dchat("rubattle.net", 6112, *sys.argv[1:3]).run()
+    Dchat("rubattle.net", 6112, *sys.argv[-2:]).run()

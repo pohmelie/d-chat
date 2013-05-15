@@ -1,3 +1,4 @@
+import time
 import urwid
 import collections
 
@@ -11,16 +12,32 @@ class ChatWalker(urwid.ListWalker):
         self.whisper_messages = collections.deque(maxlen=1000)
         self.lines = self.all_messages
 
+        self.logger_all = open("d-chat-all.log", "a")
+        self.logger_whisper = open("d-chat-whisper.log", "a")
+
+    def log(self, logger, elements):
+        s = ""
+        for el in elements:
+            if isinstance(el, tuple):
+                el = el[1]
+            s = s + el
+
+        logger.write(time.strftime("[%Y.%m.%d]") + s + "\n")
+        logger.flush()
+
     def __getitem__(self, position):
-        return self.lines[-position - self.shift - 1]
+        return self.lines[position + self.shift]
 
     def push(self, *args, **kwargs):
         widget = urwid.Text(list(args))
         whisper = kwargs.get("whisper", False)
 
         if whisper:
-            self.whisper_messages.append(widget)
-        self.all_messages.append(widget)
+            self.whisper_messages.appendleft(widget)
+            self.log(self.logger_whisper, args)
+
+        self.all_messages.appendleft(widget)
+        self.log(self.logger_all, args)
 
         if (whisper or self.lines is self.all_messages) and self.shift != 0:
             self.up()
