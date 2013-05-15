@@ -67,7 +67,7 @@ class AutoTrade():
 
     def command_trade_stop(self, msg):
         if self.started:
-            self.say("\\echo Autotrade stopping...")
+            self.say("\\echo Stopping autotrade...")
             self.stopping = True
         else:
             self.say("\\echo Autotrade not started")
