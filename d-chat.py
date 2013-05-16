@@ -94,6 +94,7 @@ class Dchat():
             msg = self.tui.inpu.get_edit_text()
             if len(msg.strip()) > 0:
                 self.commands_history.appendleft(msg)
+                self.commands_history_index = None
                 self.say(msg)
                 self.tui.inpu.set_edit_text("")
 
@@ -102,6 +103,12 @@ class Dchat():
 
         elif key == "ctrl w":
             self.tui.chat.switch()
+
+        elif key == "ctrl r":
+            self.reload()
+
+        elif key == "ctrl t":
+            self.say("\\trade-info")
 
         elif key == "tab":
             self.autocomplete()
