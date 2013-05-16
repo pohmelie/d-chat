@@ -24,6 +24,8 @@ class Dchat():
 
         self.nicknames = {}
         self.autocomplete_dictionary = set()
+        self.commands_history = collections.deque(maxlen=20)
+        self.commands_history_index = None
 
         self.navigation = {
             "ctrl up": lambda: self.tui.chat.up(),
@@ -89,8 +91,11 @@ class Dchat():
             self.tui.chat.refresh()
 
         elif key == "enter":
-            self.say(self.tui.inpu.get_edit_text())
-            self.tui.inpu.set_edit_text("")
+            msg = self.tui.inpu.get_edit_text()
+            if len(msg.strip()) > 0:
+                self.commands_history.appendleft(msg)
+                self.say(msg)
+                self.tui.inpu.set_edit_text("")
 
         elif key == "ctrl x":
             raise urwid.ExitMainLoop()
@@ -100,6 +105,26 @@ class Dchat():
 
         elif key == "tab":
             self.autocomplete()
+
+        elif key == "up":
+            if len(self.commands_history) != 0:
+                if self.commands_history_index is None:
+                    self.commands_history_index = 0
+                else:
+                    self.commands_history_index = min(self.commands_history_index + 1, len(self.commands_history) - 1)
+
+                self.tui.inpu.set_edit_text("")
+                self.tui.inpu.insert_text(self.commands_history[self.commands_history_index])
+
+        elif key == "down":
+            if self.commands_history_index == 0:
+                self.commands_history_index = None
+                self.tui.inpu.set_edit_text("")
+
+            elif self.commands_history_index is not None:
+                self.commands_history_index = max(self.commands_history_index - 1, 0)
+                self.tui.inpu.set_edit_text("")
+                self.tui.inpu.insert_text(self.commands_history[self.commands_history_index])
 
         self.refresh_title()
 
