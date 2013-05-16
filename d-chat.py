@@ -256,7 +256,7 @@ class Dchat():
                 self.push(("autocomplete", word))
 
         elif len(passes) == 1:
-            self.tui.inpu.insert_text(passes[0][len(end):])
+            self.tui.inpu.insert_text(passes[0][len(end):] + " ")
 
 
 if __name__ == "__main__":
