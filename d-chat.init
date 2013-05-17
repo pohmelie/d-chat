@@ -1,5 +1,0 @@
-\trade-timeout 300
-\trade-message N kira [70@] | to claws | sandstorm trek [70pr]
-\trade-info
-\echo Starting autotrade...
-\trade-start
