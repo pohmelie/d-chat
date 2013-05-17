@@ -1,5 +1,5 @@
 class AutoTrade():
-    TRADE_INFO_FORMAT = "\\echo Trade info:\nmessage = {message}\ntimeout = {current_time}/{timeout}\n"
+    TRADE_INFO_FORMAT = "Trade info:\nmessage = {message}\ntimeout = {current_time}/{timeout}\n"
 
     def __init__(self, say, loop):
         self.trade_message = None
@@ -13,33 +13,47 @@ class AutoTrade():
         self.current_time = 0
 
         self.commands = {
-            "\\trade-message": lambda msg: self.command_trade_message(msg),
-            "\\trade-timeout": lambda msg: self.command_trade_timeout(msg),
-            "\\trade-start": lambda msg: self.command_trade_start(msg),
-            "\\trade-stop": lambda msg: self.command_trade_stop(msg),
-            "\\trade-info": lambda msg: self.command_trade_info(msg),
+            "\\trade-message": self.command_trade_message,
+            "\\trade-timeout": self.command_trade_timeout,
+            "\\trade-start": self.command_trade_start,
+            "\\trade-stop": self.command_trade_stop,
+            "\\trade-info": self.command_trade_info,
         }
 
     def activity_triggered(self):
         self.activity = True
 
     def command_trade_info(self, msg):
-        self.say(
-            str.format(
+        '''
+        \\trade-info
+            Show current trade information.
+        '''
+
+        info = str.format(
                 AutoTrade.TRADE_INFO_FORMAT,
                 message=self.trade_message,
                 current_time=self.current_time,
                 timeout=self.trade_timeout
             )
-        )
+
+        for s in info.split("\n"):
+            self.say("\\echo " + s)
 
     def command_trade_message(self, msg):
+        '''
+        \\trade-message [message]
+            Set new trade message. Show current trade message if parameters are omitted.
+        '''
         if len(str.split(msg)) == 1:
             self.say(str.format("\\echo Current trade-message = {}", self.trade_message))
         else:
             self.trade_message = str.strip(msg[str.index(msg, " "):])
 
     def command_trade_timeout(self, msg):
+        '''
+        \\trade-timeout [seconds]
+            Set new trade timeout in seconds. Show current trade timeout if parameters are omitted.
+        '''
         if len(str.split(msg)) == 1:
             self.say(str.format("\\echo Current trade-timeout = {}", self.trade_timeout))
         else:
@@ -50,6 +64,10 @@ class AutoTrade():
                 self.say(str.format("\\echo Bad parameter '{}'. Should be positive integer", x))
 
     def command_trade_start(self, msg):
+        '''
+        \\trade-start
+            Start trade timer.
+        '''
         if self.started:
             self.say("\\echo Autotrade already started")
             return
@@ -66,6 +84,10 @@ class AutoTrade():
             self.loop.set_alarm_in(1, self.callback)
 
     def command_trade_stop(self, msg):
+        '''
+        \\trade-stop
+            Stop trade timer.
+        '''
         if self.started:
             self.say("\\echo Stopping autotrade...")
             self.stopping = True
