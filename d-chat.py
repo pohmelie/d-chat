@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import bnet
 import tui
 import urwid
@@ -24,11 +26,11 @@ class Dchat():
         ("f1", "Show this help."),
     )
 
-    LOGO = '''    ██
-    ██
-██████     █████ ██ ██ █████ ██████
-██  ██ ███ ██    █████ ██▄██   ██
-██████     █████ ██ ██ ██▀██   ██'''
+    LOGO = '''    ##
+    ##
+######     ##### ## ##  #### ######
+##  ## ### ##    ##### ##=##   ##
+######     ##### ## ## ## ##   ##'''
 
     def __init__(self, host, port):
         self.account = None
