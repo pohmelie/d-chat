@@ -1,7 +1,9 @@
 /__pycache__/
 *.pyc
 *.pyo
-d-chat.log
+/d-chat.log
 /d-chat-all.log
 /d-chat-whisper.log
 /d-chat.init
+/construct/
+/urwid/
