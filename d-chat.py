@@ -26,7 +26,8 @@ class Dchat():
         ("f1", "Show this help."),
     )
 
-    LOGO = '''    ##
+    LOGO = '''
+    ##
     ##
 ######     ##### ## ##  #### ######
 ##  ## ### ##    ##### ##-##   ##
@@ -374,7 +375,6 @@ class Dchat():
 if __name__ == "__main__":
     logging.basicConfig(
         filename="d-chat.log",
-        filemode="w",
         level=logging.INFO,
         format="%(asctime)s %(message)s",
         datefmt="[%H:%M:%S]",

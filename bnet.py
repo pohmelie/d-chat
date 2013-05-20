@@ -147,14 +147,6 @@ class Bnet():
                             )
                         )
                     )
-                    self.sock.sendall(
-                        spacket.build(
-                            Container(
-                                packet_id="SID_GETCHANNELLIST",
-                                product_id=b"PX2D",
-                            )
-                        )
-                    )
 
             elif pack.packet_id == "SID_ENTERCHAT":
                 self.sock.sendall(
