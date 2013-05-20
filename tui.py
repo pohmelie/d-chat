@@ -8,8 +8,8 @@ class ChatWalker(urwid.ListWalker):
         urwid.ListWalker.__init__(self)
         self.focus = 0
         self.shift = 0
-        self.all_messages = collections.deque(maxlen=10000)
-        self.whisper_messages = collections.deque(maxlen=1000)
+        self.all_messages = collections.deque(maxlen=1000)
+        self.whisper_messages = collections.deque(maxlen=100)
         self.lines = self.all_messages
 
         self.logger_all = open("d-chat-all.log", "a")
