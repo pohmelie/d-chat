@@ -338,7 +338,7 @@ class Dchat():
         elif packet.event_id in ("ID_BROADCAST",):
             acc = str(packet.username, "utf-8")
             self.push(
-                ("whisper nickname", acc),
+                ("whisper nickname", "Announcement from " + str(packet.username, "utf-8")),
                 ("delimiter", ": "),
                 ("whisper", str(packet.text, "utf-8")),
                 whisper=True,
