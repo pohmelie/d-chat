@@ -335,6 +335,15 @@ class Dchat():
                 whisper=True,
             )
 
+        elif packet.event_id in ("ID_BROADCAST",):
+            acc = str(packet.username, "utf-8")
+            self.push(
+                ("whisper nickname", acc),
+                ("delimiter", ": "),
+                ("whisper", str(packet.text, "utf-8")),
+                whisper=True,
+            )
+
         else:
             logging.info(str.format("[d-chat.py] unhandled chat event\n{}", packet))
 
